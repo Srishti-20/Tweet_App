@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search Tweets
+{% endblock title %}
+
+{% block content %}
+<h1 class="text-center mt-4">Search Results for Tweets</h1>
+
+<form method="GET" action="{% url 'tweet_search' %}" class="form mt-3">
+    <input type="text" name="q" placeholder="Search tweets..." class="form-control" value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-primary mt-3">Search</button>
+</form>
+
+<div class="container row gap-3 mt-4">
+    {% if tweets %}
+        {% for tweet in tweets %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ tweet.user.username }}</h5>
+                    <p class="card-text">{{ tweet.text }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No tweets found matching your search criteria.</p>
+    {% endif %}
+</div>
+<a href="{% url 'tweet_list' %}" class="btn btn-secondary mt-4">Back to tweet list</a>
+{% endblock content %}

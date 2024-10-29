@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    About Us
+{% endblock title %}
+
+{% block content %}
+<h1 class="text-center mt-4">About Us</h1>
+<p class="mt-4">
+    Welcome to Chai's Django Project. This project allows users to tweet and engage with content.
+    Our goal is to provide a platform where users can share their thoughts and ideas with the world.
+</p>
+<a href="{% url 'tweet_list' %}" class="btn btn-secondary mt-4">Back to tweet list</a>
+{% endblock content %}
