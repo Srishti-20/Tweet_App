@@ -6,9 +6,35 @@
 
 {% block content %}
 <h1 class="text-center mt-4">About Us</h1>
-<p class="mt-4">
-    Welcome to Chai's Django Project. This project allows users to tweet and engage with content.
-    Our goal is to provide a platform where users can share their thoughts and ideas with the world.
-</p>
-<a href="{% url 'tweet_list' %}" class="btn btn-secondary mt-4">Back to tweet list</a>
+<div class="container mt-4">
+    <p>
+        Welcome to the <strong>Tweet App</strong>, an innovative Django project designed to empower users to express themselves through concise and impactful tweets.
+    </p>
+    <p>
+        Our platform offers a seamless experience where you can share your thoughts, ideas, and moments with just a single line. Whether you're looking to spark creativity, engage with others, or simply share your daily musings, the Tweet App provides the perfect space for you to connect and communicate.
+    </p>
+    
+    <h2>Our Mission</h2>
+    <p>
+        At Tweet App, we believe in the power of words and creativity. Our goal is to provide a dynamic platform that encourages users to articulate their thoughts in a unique and engaging way. By simplifying the tweeting process, we aim to inspire you to think creatively and express yourself effortlessly.
+    </p>
+
+    <h2>Join Our Community</h2>
+    <p>
+        Join our community of passionate users and start sharing your voice today!
+    </p>
+
+    <h2>Key Features</h2>
+    <ul class="list-group mb-4">
+        <li class="list-group-item">Easy Posting: Tweet your thoughts instantly with our user-friendly interface.</li>
+        <li class="list-group-item">Engagement: Interact with other users, follow your favorite accounts, and be part of the conversation.</li>
+        <li class="list-group-item">Creativity Boost: Use our platform as a canvas for your ideas, enhancing your creative thinking.</li>
+    </ul>
+
+    <p>
+        Thank you for being part of the Tweet App journey. We’re excited to see what you’ll share!
+    </p>
+
+    <a href="{% url 'tweet_list' %}" class="btn btn-primary mt-4">Back to Tweet List</a>
+</div>
 {% endblock content %}

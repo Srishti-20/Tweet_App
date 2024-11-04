@@ -5,13 +5,15 @@
 {% endblock title %}
 
 {% block content %}
-<h1 class="text-center mt-4">Contact Us</h1>
-<p class="mt-4">
-    If you have any questions, feel free to reach out to us at:
-    <ul>
-        <li>Email: support@tweetapp.com</li>
-        <li>Phone: +123 456 7890</li>
-    </ul>
-</p>
-<a href="{% url 'tweet_list' %}" class="btn btn-secondary mt-4">Back to tweet list</a>
+    <div class="container mt-4">
+        <h1 class="text-center">Contact Us</h1>
+        <p class="mt-4">
+            If you have any questions, feel free to reach out to us at:
+        </p>
+        <ul class="list-unstyled">
+            <li><strong>Email:</strong> support@tweetapp.com</li>
+            <li><strong>Phone:</strong> +123 456 7890</li>
+        </ul>
+        <a href="{% url 'tweet_list' %}" class="btn btn-primary mt-4">Back to Tweet List</a>
+    </div>
 {% endblock content %}

@@ -4,17 +4,25 @@ Tweet App
 {% endblock title %}
 
 {% block content %}
-<h1 class = "text center mt-4">
-    Welcome to My Django project
+<h1 class = "text-center mx-2 my-2">
+    Welcome to the Tweet App
 </h1>
-<a class = "btn btn-primary mb-4" href="{% url 'tweet_create' %}">Create a Tweet</a>
-<div class="container row gap-3">
+<a class = "btn btn-primary mx-2 my-2" href="{% url 'tweet_create' %}">Create a Tweet</a>
+
+<div class="container row gap-0">
     {% for tweet in tweets  %}
-    <div class="card" style="width: 18rem;">
-        <img src={{tweet.photo.url}} class="card-img-top" alt="..." style="margin-top: 10px;">
+    <div class="card mx-2 my-2" style="width: 18rem;">
+      {% if tweet.photo %}
+      <img src="{{ tweet.photo.url }}" class="card-img-top" alt="..." style="margin-top: 10px;">
+      {% endif %}
         <div class="card-body">
           <h5 class="card-title">{{tweet.user.username}}</h5>
           <p class="card-text">{{tweet.text}}</p>
+          <p class="card-text">
+            <small class="text-muted">
+                Uploaded on: {{ tweet.created_at|date:"d-m-Y H:i" }}<br>
+            </small>
+        </p>
           {% if tweet.user == user %}
           <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
           <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>

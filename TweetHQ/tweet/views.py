@@ -1,12 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Tweet
 from .forms import TweetForm, UserRegistrationForm
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.db.models import Q
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm
 
-# Create your views here.
+def homepage(request):
+    return render(request, 'homepage.html')
 
 def index(request):
     return render(request, 'index.html')
@@ -84,3 +88,39 @@ def tweet_search(request):
     else:
         tweets = Tweet.objects.all().order_by('-created_at')
     return render(request, 'tweet_search.html', {'tweets': tweets})
+
+# user account details
+@login_required
+def account_view(request):
+    # Get the user's tweets count
+    tweets_count = Tweet.objects.filter(user=request.user).count()  # Replace with your actual logic
+    
+    if request.method == 'POST':
+        # Handle change username
+        if 'change_username' in request.POST:
+            new_username = request.POST.get('username')
+            if User.objects.filter(username=new_username).exists():
+                messages.error(request, "Username already exists.")
+            else:
+                request.user.username = new_username
+                request.user.save()
+                messages.success(request, "Username changed successfully.")
+
+        # Handle change password
+        elif 'change_password' in request.POST:
+            password_form = PasswordChangeForm(request.user, request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                messages.success(request, "Password changed successfully.")
+                return redirect('account')  # Redirect to account page after successful change
+            else:
+                messages.error(request, "Please correct the error below.")
+    
+    # Create the password change form
+    password_form = PasswordChangeForm(request.user)
+
+    return render(request, 'account.html', {
+        'username': request.user.username,
+        'tweets_count': tweets_count,
+        'password_form': password_form,
+    })

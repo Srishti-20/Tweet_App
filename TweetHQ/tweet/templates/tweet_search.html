@@ -5,27 +5,43 @@
 {% endblock title %}
 
 {% block content %}
-<h1 class="text-center mt-4">Search Results for Tweets</h1>
+<div class="container mt-5 p-4 border rounded">
+    <h1 class="text-center mb-4">Search Results for Tweets</h1>
 
-<form method="GET" action="{% url 'tweet_search' %}" class="form mt-3">
-    <input type="text" name="q" placeholder="Search tweets..." class="form-control" value="{{ request.GET.q }}">
-    <button type="submit" class="btn btn-primary mt-3">Search</button>
-</form>
-
-<div class="container row gap-3 mt-4">
-    {% if tweets %}
-        {% for tweet in tweets %}
-            <div class="card" style="width: 18rem;">
-                <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet Image">
-                <div class="card-body">
-                    <h5 class="card-title">{{ tweet.user.username }}</h5>
-                    <p class="card-text">{{ tweet.text }}</p>
-                </div>
+    <form method="GET" action="{% url 'tweet_search' %}" class="form-inline mb-4">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <input type="text" name="q" placeholder="Search tweets..." class="form-control" style="width: 200px;" value="{{ request.GET.q }}">
             </div>
-        {% endfor %}
-    {% else %}
-        <p>No tweets found matching your search criteria.</p>
-    {% endif %}
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="container row gap-3 mt-4">
+        {% if tweets %}
+            {% for tweet in tweets %}
+                <div class="card mx-2 my-2" style="width: 18rem;">
+                    <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet Image" style="margin-top: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ tweet.user.username }}</h5>
+                        <p class="card-text">{{ tweet.text }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Uploaded on: {{ tweet.created_at|date:"d-m-Y H:i" }}<br>
+                            </small>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center">No tweets found matching your search criteria.</p>
+        {% endif %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'tweet_list' %}" class="btn btn-secondary">Back to tweet list</a>
+    </div>
 </div>
-<a href="{% url 'tweet_list' %}" class="btn btn-secondary mt-4">Back to tweet list</a>
 {% endblock content %}
