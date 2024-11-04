@@ -1,8 +1,8 @@
 version: 1
 services:
   - type: web
-    name: TweetApp
-    env: python
+    name: Tweet_App
+    env: python3
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn TWEET_APP.wsgi"
+    startCommand: "gunicorn TweetHQ.wsgi"
     autoDeploy: true
