@@ -1,3 +1,4 @@
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -9,16 +10,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@afj5om1gegu(en)q2k+v_u$7ghsjk5pw6@4(7^y*wcb)(2oyw'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os. environ. get ("DEBUG", "False"). lower () == "true"
 
-ALLOWED_HOSTS = [
-    # 'tweet-app-438m.onrender.com',  
-    # 'localhost',                    
-    # '127.0.0.1', 
-]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -35,6 +32,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,6 +72,8 @@ DATABASES = {
     }
 }
 
+database_url = os.environ.get("DATABASE_URL")
+DATABASES["default"] = dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
