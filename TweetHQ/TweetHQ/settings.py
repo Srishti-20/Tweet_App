@@ -15,9 +15,9 @@ SECRET_KEY = 'django-insecure-@afj5om1gegu(en)q2k+v_u$7ghsjk5pw6@4(7^y*wcb)(2oyw
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'tweet-app-438m.onrender.com',  # Render domain
-    'localhost',                    # For local testing
-    '127.0.0.1', 
+    # 'tweet-app-438m.onrender.com',  
+    # 'localhost',                    
+    # '127.0.0.1', 
 ]
 
 
